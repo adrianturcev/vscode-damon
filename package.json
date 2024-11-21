@@ -1,0 +1,77 @@
+{
+    "name": "vscode-damon",
+    "displayName": "DAMON",
+    "description": "Language support for DAMON",
+    "publisher": "adrian-turcev",
+    "repository": "https://github.com/adrianturcev/vscode-damon",
+    "version": "1.0.0",
+    "license": "MIT",
+    "engines": {
+        "vscode": ">=1.40.0",
+        "node": "20.11.1",
+        "npm": "10.2.4"
+    },
+    "scripts": {
+        "test": "vscode-test"
+    },
+    "contributes": {
+        "languages": [
+            {
+                "id": "damon",
+                "extensions": [
+                    ".dm"
+                ],
+                "aliases": [
+                    "Damon"
+                ],
+                "filenames": [],
+                "configuration": "./language-configuration.json"
+            },
+            {
+                "id": "damon-markdown-injection"
+            },
+            {
+                "id": "damon-javascript-injection"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "damon",
+                "scopeName": "source.dm",
+                "path": "./syntaxes/damon.tmLanguage.json"
+            },
+            {
+                "language": "damon-markdown-injection",
+                 "path": "./syntaxes/codeblock.json",
+                "scopeName": "markdown.damon.codeblock",
+                "injectTo": [
+                    "text.html.markdown"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.block.damon": "damon"
+                }
+            },
+            {
+                "language": "damon-javascript-injection",
+                "path": "./syntaxes/template.json",
+                "scopeName": "javascript.damon.template",
+                "injectTo": [
+                    "source.js",
+                    "source.js.jsx",
+                    "source.jsx",
+                    "source.ts",
+                    "source.tsx",
+                    "text.html.basic",
+                    "string.template.js"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.block.damon": "damon"
+                }
+            }
+        ]
+    },
+    "devDependencies": {
+        "@vscode/test-cli": "^0.0.10",
+        "@vscode/test-electron": "^2.4.1"
+    }
+}

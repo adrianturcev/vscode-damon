@@ -1,0 +1,161 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "scopeName": "source.dm",
+    "displayName": "DAMON",
+    "name": "damon",
+    "patterns": [{
+        "include": "#value"
+    }],
+    "repository": {
+        "listmarker": {
+            "match": "^((?<=[ \\t]*)- )|(- )",
+            "name": "keyword.operator.damon"
+        },
+        "array": {
+            "begin": "\\[",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.array.begin.damon"
+                }
+            },
+            "end": "\\]",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.array.end.damon"
+                }
+            },
+            "name": "meta.structure.array.damon",
+            "patterns": [
+                {
+                    "include": "#primitivevalue"
+                },
+                {
+                    "match": ",",
+                    "name": "punctuation.separator.array.damon"
+                },
+                {
+                    "match": "[^\\s\\]]",
+                    "name": "invalid.illegal.expected-array-separator.damon"
+                }
+            ]
+        },
+        "comments": {
+            "patterns": [
+                {
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.comment.damon"
+                        }
+                    },
+                    "match": "(//).*$\\n?",
+                    "name": "comment.line.double-slash.js"
+                }
+            ]
+        },
+        "constant": {
+            "match": "\\b(?:true|false|null)\\b",
+            "name": "constant.language.damon"
+        },
+        "number": {
+            "match": "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+            "name": "constant.numeric.damon"
+        },
+        "object": {
+            "match": "(?:\\{ *\\})\\n",
+            "name": "meta.structure.dictionary.damon"
+        },
+        "mapkeyvalue": {
+            "begin": ": ",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.separator.dictionary.key-value.damon"
+                }
+            },
+            "end": "((?=\\n)",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.separator.dictionary.pair.damon"
+                }
+            },
+            "name": "meta.structure.dictionary.value.damon",
+            "patterns": [
+                {
+                    "comment": "the JSON object value",
+                    "include": "#value"
+                },
+                {
+                    "match": "[^ +\\n]",
+                    "name": "invalid.illegal.trailing-space.damon"
+                }
+            
+            ]
+        },
+        "mapkey": {
+            "name": "string.damon support.type.property-name.damon",
+            "match": "(?<=- ).+(?=(: (true *$|false *$|null *$|\".*\" *$|\\{.*\\} *$|\\[.*] *$|-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)? *$)))"
+        },
+        "string": {
+            "begin": "\"",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.begin.damon"
+                }
+            },
+            "end": "\"",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.end.damon"
+                }
+            },
+            "name": "string.quoted.double.damon",
+            "patterns": [{
+                "include": "#stringcontent"
+            }]
+        },
+        "stringcontent": {
+            "patterns": [{
+                    "match": "\\\\(?:[\"\\\\/bfnrt]|u[0-9a-fA-F]{4})",
+                    "name": "constant.character.escape.damon"
+                },
+                {
+                    "match": "\\\\.",
+                    "name": "invalid.illegal.unrecognized-string-escape.damon"
+                }
+            ]
+        },
+        "primitivevalue": {
+            "patterns": [{
+                    "include": "#constant"
+                },
+                {
+                    "include": "#number"
+                },
+                {
+                    "include": "#string"
+                }
+            ]
+        },
+        "value": {
+            "patterns": [
+                {
+                    "include": "#primitivevalue"
+                },
+                {
+                    "include": "#array"
+                },
+                {
+                    "include": "#object"
+                },
+                {
+                    "include": "#comments"
+                },
+                {
+                    "include": "#listmarker"
+                },
+                {
+                    "include": "#mapkey"
+                }
+            ]
+        }
+    }
+}
