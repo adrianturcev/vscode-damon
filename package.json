@@ -2,7 +2,7 @@
     "name": "vscode-damon",
     "displayName": "DAMON",
     "description": "Language support for DAMON",
-    "publisher": "adrian-turcev",
+    "publisher": "adrianturcev",
     "repository": "https://github.com/adrianturcev/vscode-damon",
     "version": "1.0.0",
     "license": "MIT",
