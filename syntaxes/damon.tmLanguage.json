@@ -87,7 +87,6 @@
                     "match": "[^ +\\n]",
                     "name": "invalid.illegal.trailing-space.damon"
                 }
-            
             ]
         },
         "mapkey": {
